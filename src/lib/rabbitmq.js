@@ -11,7 +11,9 @@ export async function connect() {
 
 
 export async function subscribeEvents(exchange, routingKey, callback) {
-  if (!channel) await connect();
+  if (!channel) {
+    throw new Error("RabbitMQ is not connected.");
+  }
   // 1. Khai báo exchange
   await channel.assertExchange(exchange, "topic", { durable: true });
 
