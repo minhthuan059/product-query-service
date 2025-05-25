@@ -28,8 +28,8 @@ export async function subscribeEvents(exchange, routingKey, callback) {
     if (msg !== null) {
       try {
         const data = JSON.parse(msg.content.toString());
-        channel.ack(msg);
         await callback(data);
+        channel.ack(msg);
       } catch (error) {
         console.error("Error processing message:", error);
         channel.nack(msg, false, false);
