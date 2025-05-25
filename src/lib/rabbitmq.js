@@ -16,7 +16,10 @@ export async function subscribeEvents(exchange, routingKey, callback) {
   await channel.assertExchange(exchange, "topic", { durable: true });
 
   // 2. Tạo queue riêng
-  const { queue } = await channel.assertQueue("", { exclusive: true });
+  const queueName = `query_queue_${routingKey}`;
+  const { queue } = await channel.assertQueue(queueName, {
+    durable: true,
+  });
 
   // 3. Bind queue với exchange + routing key
   await channel.bindQueue(queue, exchange, routingKey);
