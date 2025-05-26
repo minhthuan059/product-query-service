@@ -12,8 +12,7 @@ const getAllProducts = async () => {
 };
 
 // Create
-const createProduct = async (name, price) => {
-  const id = uuidv4();
+const createProduct = async (id, name, price) => {
   await pool.query('INSERT INTO products (id, name, price) VALUES ($1, $2, $3)', [id, name, price]);
 };
 

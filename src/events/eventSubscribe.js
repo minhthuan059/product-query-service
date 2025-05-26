@@ -8,8 +8,8 @@ export async function setupEventSubscriptions() {
   const exchange = RABBIT_EXCHANGES.PRODUCT;
 
   await subscribeEvents(exchange, RABBIT_ROUTING_KEYS.PRODUCT_CREATED, async (data) => {
-    const { name, price } = data;
-    await handlers.createProduct(name, price);
+    const {id, name, price } = data;
+    await handlers.createProduct(id, name, price);
     return;
   });
 
