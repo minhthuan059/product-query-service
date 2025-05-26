@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const result = await handlers.getAllProducts();
-  res.json({data: result});
+  res.json(result).status(200);
 });
 
 export default router;
